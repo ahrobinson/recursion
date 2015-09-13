@@ -4,9 +4,6 @@
 // but you don't so you're going to write it from scratch:
 
 var stringifyJSON = function(obj) {
-  function isComplex(obj){
-      return typeof obj !== null && typeof obj === "object";
-  }
   // your code goes here
   if(typeof obj === 'string'){
     return '"' + obj + '"';
@@ -25,11 +22,7 @@ var stringifyJSON = function(obj) {
   if(Array.isArray(obj)){
     if(obj.length){
       for(var i = 0; i < obj.length; i++){
-        if(Array.isArray(obj[i])){
           JSONHolder.push(stringifyJSON(obj[i]));
-        } else {
-          JSONHolder.push(stringifyJSON(obj[i]));
-        }
       }
     } else {
       return "[]";
@@ -43,8 +36,6 @@ var stringifyJSON = function(obj) {
         if(typeof obj[prop] === 'function' || typeof obj[prop] === 'undefined'){
           output += '{}';
           return output;
-        } else if(isComplex(obj[prop])){
-            stringifyJSON(obj[prop]);
         }
         output += '"' + prop + '":' + stringifyJSON(obj[prop]) +  ',';
 
