@@ -34,12 +34,11 @@ var stringifyJSON = function(obj) {
       var output = '';
       for(var prop in obj){
         if(typeof obj[prop] === 'function' || typeof obj[prop] === 'undefined'){
-          output += '{}';
-          return output;
+          output += '';
+        } else {
+          output += '"' + prop + '":' + stringifyJSON(obj[prop]) +  ',';
         }
-        output += '"' + prop + '":' + stringifyJSON(obj[prop]) +  ',';
-
-  }
+      }
       return '{' + output.slice(0,-1) + '}';
     } else {
       return '{}';
